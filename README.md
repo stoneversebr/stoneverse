@@ -59,7 +59,6 @@
     // Extrai o ID da URL: ?id=STONE-A3F9C2
     const urlParams = new URLSearchParams(window.location.search);
     const stoneID = urlParams.get('id');
-
     const contentDiv = document.getElementById('content');
 
     if (!stoneID) {
