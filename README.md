@@ -93,19 +93,4 @@
     }
   </script>
 </body>
-</html>" class="btn btn-ar">
-            🕶️ Ver em Realidade Aumentada
-          </a>
-        `;
-      };
-      img.onerror = function() {
-        contentDiv.innerHTML = `
-          <p>❌ Foto não encontrada para ${stoneID}</p>
-          <p>Verifique se a placa foi digitalizada corretamente.</p>
-        `;
-      };
-      img.src = imgUrl;
-    }
-  </script>
-</body>
-</html>
+</html>"
