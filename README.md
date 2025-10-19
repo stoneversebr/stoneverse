@@ -5,22 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>StoneVerse – Placa Digital</title>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; text-align: center; }
+    body { 
+      font-family: 'Segoe UI', sans-serif; 
+      max-width: 900px; 
+      margin: 40px auto; 
+      padding: 20px; 
+      text-align: center; 
+      background: #f9f9f9;
+    }
     h1 { color: #2e7d32; }
-    img { max-width: 100%; height: auto; border-radius: 12px; margin: 20px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-    .info { background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; display: inline-block; }
-    .btn { background: #2e7d32; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 10px; display: inline-block; font-weight: bold; }
-    .btn-ar { background: #1976d2; }
-    canvas { width: 100%; height: auto; border: 2px solid #ddd; border-radius: 12px; margin-top: 20px; }
+    img { 
+      max-width: 100%; 
+      height: auto; 
+      border-radius: 12px; 
+      margin: 20px 0; 
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border: 3px solid #ddd;
+    }
+    .info { 
+      background: #f5f5f5; 
+      padding: 15px; 
+      border-radius: 8px; 
+      margin: 20px 0; 
+      text-align: left; 
+      display: inline-block;
+      width: 100%;
+    }
+    .btn { 
+      background: #2e7d32; 
+      color: white; 
+      padding: 12px 24px; 
+      text-decoration: none; 
+      border-radius: 6px; 
+      margin: 10px; 
+      display: inline-block; 
+      font-weight: bold; 
+      font-size: 16px;
+    }
+    .btn-ar { 
+      background: #1976d2; 
+    }
+    .loading { color: #666; font-style: italic; }
   </style>
-
-  <!-- 8thWall SDK -->
-  <script src="https://cdn.8thwall.com/web/xrweb.js"></script>
 </head>
 <body>
   <h1>🪨 Placa Digitalizada</h1>
+
   <div id="content">
-    <!-- Carregado dinamicamente -->
+    <p class="loading">Carregando dados...</p>
   </div>
 
   <script>
@@ -28,54 +60,36 @@
     const urlParams = new URLSearchParams(window.location.search);
     const stoneID = urlParams.get('id');
 
+    const contentDiv = document.getElementById('content');
+
     if (!stoneID) {
-      document.getElementById('content').innerHTML = '<p>ID não fornecido.</p>';
+      contentDiv.innerHTML = '<p>ID não fornecido. Verifique o link.</p>';
     } else {
-      document.getElementById('content').innerHTML = `
-        <img src="fotos/${stoneID}.jpg" alt="Placa ${stoneID}" onerror="this.src='https://via.placeholder.com/600x400?text=Foto+Indisponível'">
-        <div class="info">
-          <p><strong>ID Único:</strong> ${stoneID}</p>
-          <p><strong>Status:</strong> Disponível para instalação</p>
-          <p><strong>Localização:</strong> Depósito Central, Setor B</p>
-        </div>
-        <button onclick="startAR()" class="btn btn-ar">🕶️ Ver em Realidade Aumentada</button>
-        <p><small>O AR funciona no celular (Chrome/Safari).</small></p>
-      `;
-    }
+      // Monta a URL da imagem
+      const imgUrl = fotos/${stoneID}.jpg;
 
-    // Função para ativar o AR
-    function startAR() {
-      const photoUrl = https://stoneversebr.github.io/stoneverse/fotos/${stoneID}.jpg;
-
-      // Configura o 8thWall
-      XR8.addCameraPipelineModules([
-        XR8.GlTextureRenderer.pipelineModule(),
-        XR8.XrController.pipelineModule(),
-        XR8.XText.pipelineModule(), // Para mostrar o ID
-      ]);
-
-      // Inicia o AR
-      XR8.run({
-        canvas: document.createElement('canvas'),
-        url: 'https://stoneversear.8thwall.app/stone-ar-viewer?id=${stoneID}', // 🔁 Substitua depois
-        onxrloaded: () => {
-          document.getElementById('content').innerHTML = '';
-          document.body.appendChild(XR8.canvas());
-          
-          // Mostra mensagem
-          const msg = document.createElement('p');
-          msg.textContent = 'Aponte para o chão para ver a placa instalada.';
-          msg.style.color = 'white';
-          msg.style.backgroundColor = 'rgba(0,0,0,0.6)';
-          msg.style.padding = '10px';
-          msg.style.borderRadius = '8px';
-          msg.style.position = 'absolute';
-          msg.style.top = '20px';
-          msg.style.left = '50%';
-          msg.style.transform = 'translateX(-50%)';
-          document.body.appendChild(msg);
-        }
-      });
+      // Verifica se a imagem existe
+      const img = new Image();
+      img.onload = function() {
+        contentDiv.innerHTML = `
+          <img src="${imgUrl}" alt="Placa ${stoneID}">
+          <div class="info">
+            <p><strong>ID Único:</strong> ${stoneID}</p>
+            <p><strong>Status:</strong> Disponível para instalação</p>
+            <p><strong>Localização:</strong> Depósito Central, Setor B</p>
+          </div>
+          <a href="exp://SEU_USUARIO.8thwall.app/stone-ar-viewer?id=${stoneID}" class="btn btn-ar">
+            🕶️ Ver em Realidade Aumentada
+          </a>
+        `;
+      };
+      img.onerror = function() {
+        contentDiv.innerHTML = `
+          <p>❌ Foto não encontrada para ${stoneID}</p>
+          <p>Verifique se a placa foi digitalizada corretamente.</p>
+        `;
+      };
+      img.src = imgUrl;
     }
   </script>
 </body>
