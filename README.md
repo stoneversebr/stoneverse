@@ -77,7 +77,7 @@
             <p><strong>Status:</strong> Disponível para instalação</p>
             <p><strong>Localização:</strong> Depósito Central, Setor B</p>
           </div>
-          <a href="exp://SEU_USUARIO.8thwall.app/stone-ar-viewer?id=${stoneID}" class="btn btn-ar">
+          <a href="https://stoneversebr.8thwall.app/stone-ar-viewer?id=${stoneID}" class="btn btn-ar">
             🕶️ Ver em Realidade Aumentada
           </a>
         `;
