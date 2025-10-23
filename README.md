@@ -51,15 +51,15 @@
 
       // ALTERAÇÃO: usar o domínio raw.githubusercontent.com para carregar a imagem diretamente
       const RAW_BASE = 'https://raw.githubusercontent.com/stoneversebr/stoneverse/main/fotos';
-      const imgUrl = ${RAW_BASE}/${encodeURIComponent(stoneID)}.jpg;
+      const imgUrl = `${RAW_BASE}/${encodeURIComponent(stoneID)}.jpg`;
       // Se preferir usar caminho relativo quando hospedado no mesmo domínio, comente a linha acima e descomente a linha abaixo:
-      // const imgUrl = fotos/${encodeURIComponent(stoneID)}.jpg;
+      // const imgUrl = `fotos/${encodeURIComponent(stoneID)}.jpg`;
 
       // Mostra link direto para testes rápidos
       function appendDebugLink(url) {
         const dbg = document.createElement('div');
         dbg.className = 'debug';
-        dbg.innerHTML = Link direto para teste: <a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>;
+        dbg.innerHTML = `Link direto para teste: <a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
         content.appendChild(dbg);
       }
 
@@ -79,7 +79,7 @@
         const img = document.createElement('img');
         img.className = 'stone-photo';
         img.src = url;
-        img.alt = Foto da placa ${stoneID};
+        img.alt = `Foto da placa ${stoneID}`;
         img.loading = 'lazy';
         img.width = 1200;
         img.onerror = function () { showImageNotFound(); };
@@ -109,7 +109,7 @@
         content.innerHTML = '';
         const p = document.createElement('p');
         p.className = 'error';
-        p.textContent = ❌ Foto não encontrada para ${stoneID};
+        p.textContent = `❌ Foto não encontrada para ${stoneID}`;
         const p2 = document.createElement('p');
         p2.textContent = 'Abra o link direto para ver o erro (404/403) e confira o caminho/nomes.';
         content.appendChild(p);
