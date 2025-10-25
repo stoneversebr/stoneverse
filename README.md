@@ -93,7 +93,7 @@
         const arButton = document.createElement('a');
         arButton.className = 'btn btn-ar';
         arButton.textContent = '🕶️ Ver em Realidade Aumentada';
-        arButton.href =  `https://stoneversear.8thwall.app/stone-ar-viewer?id=${encodeURIComponent(stoneID)}`;
+        arButton.href =  `https://stoneversear.8thwall.app/stone-ar-viewer/?id=${encodeURIComponent(stoneID)}`;
         arButton.target = '_blank';
         arButton.rel = 'noopener noreferrer';
         arButton.title = 'Abrir visualizador de Realidade Aumentada em nova aba';
